@@ -6,7 +6,7 @@ to build (you must have JDK1.8)
 
 ./activator assembly
 
-to start the REPL (https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
+to start the REPL (https://en.wikipedia.org/wiki/Read–eval–print_loop)
 ```
 java -jar target/scala-2.11/beeb-assembly-1.0-SNAPSHOT.jar
 ```
@@ -47,7 +47,9 @@ Some brief information on the commands supported.
 
 ## procedures
 Procedures are supported in a nod to BBC Basic
-```10 number=10
+
+```
+10 number=10
 20 print number
 30 procshow
 40 print number
@@ -69,7 +71,7 @@ example:
 	Execute a piece of Data Definition Language against the database defined by <descriptior>
 example:
 ```
-	"create table motd ( id INTEGER PRIMARY KEY AUTOINCREMENT, text varchar(64), created_at DEFAULT CURRENT_TIMESTAMP NOT NULL)"
+dbexecute D "create table motd ( id INTEGER PRIMARY KEY AUTOINCREMENT, text varchar(64), created_at DEFAULT CURRENT_TIMESTAMP NOT NULL)"
 ```
 
 ## dbrows <descriptor>
@@ -215,7 +217,6 @@ example:
 40 next x
 50 next y
 ```
-
 
 ## while endwhile
   flow control while endwhile structure. Condition is evaluated before loop entered. see whiledemo.basic.
