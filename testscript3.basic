@@ -1,0 +1,22 @@
+5 dim result(0,0)
+10 procsetupdb
+22 A$="hello "+rnd(1000)
+25 dbinsert (D,"insert into members(name) values ('"+A$+"')")
+26 dbselect (D,"select * from members",3,"result")
+30 rows=dbrows D
+35 stuff
+40 for i = 0 to rows-1
+44 d$=result(0,i)+'--'+result(1,i)+'---'+result(2,i)
+45 print d$
+60 next i
+100 dbclose D
+9000 defproc setupdb
+9010 D=dbopen "org.sqlite.JDBC" "jdbc:sqlite:hello.db" "sa" "sa"
+9030 dbselect (D,"SELECT name FROM sqlite_master WHERE type='table' AND name='members'",1,"result")
+9035 print "rows returned " (dbrows D)
+9040 if dbrows(D) == 0  then print proccreatedb else print "database table members exists, won't create"
+9050 endproc
+9100 defproc createdb
+9105 print "create table members"
+9110 dbexecute D "create table members ( id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(64), created_at DEFAULT CURRENT_TIMESTAMP NOT NULL)"
+9120 endproc

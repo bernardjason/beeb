@@ -1,0 +1,16 @@
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+/bin/
+lite.db
+/basic.log*
+/basic/
+hello.db
+motd.db
+.cache-main
+.cache-tests

@@ -1,0 +1,41 @@
+<html>
+<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+				<script>
+					var last;
+          function newpost() {
+						$.ajax({
+  						type: "POST",
+  						url: "/rest",
+  						data: '{ "text" : "'+$('#text').val()+'" }' ,
+  					  contentType: "application/json; charset=utf-8"
+						});
+					 $('#text').val('');	
+					window.location.reload();
+					};
+					$(document).ready(function() {
+    					$.ajax({
+        					url: "/rest"
+    					}).then(function(data) {
+								last=data;
+       					$('.content').append("</br>");
+								for(i in data) {
+									console.log(data[i].text)
+       						$('.content').append(data[i].text+"</br>");
+								}
+    					});
+					});
+			  </script>	
+</head>
+<body>
+<h1>BEEB BLOG</h1>
+<h2>this is index.html!!</h2>
+
+ <input type="text" id="text">
+ 
+ <button onclick="newpost()">Click me</button> 
+ <div>
+            <p class="content">The content is </p>
+  </div>
+</body>
+</html>

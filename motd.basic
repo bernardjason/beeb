@@ -1,0 +1,60 @@
+10 procsetupdb
+20 startweb
+30 input pause$
+40 stopweb
+50 dbclose D
+4000 defproc get
+4010 if httpurl like "/rest" then procgetmessage else procgethtml
+4020 endproc
+4030 defproc post
+4040 if httpurl like "/rest" then procpostmessage
+4050 endproc
+4100 defproc getmessage
+4110 dim result(0,0)
+4120 dbselect (D,"select * from motd order by id desc",3,"result")
+4130 rows=dbrows D
+4140 r="["
+4145 comma=""
+4150 for i = 0 to rows - 1
+4160 r=r+comma+'{"text":"'+result(1,i)+'" , "when":"'+result(2,i)+'"}\n'
+4165 comma=","
+4170 next i
+4175 r=r+"]"
+4180 httpresponse=r
+4185 httptype="application/json"
+4190 endproc
+4200 defproc postmessage
+4205 print httprequest
+4206 r=getjson "text" httprequest
+4210 dbinsert (D,"insert into motd(text) values ('"+r+"')")
+4220 endproc
+5000 defproc gethtml
+5005 Y=-1
+5010 a1=fopenin "."+httpurl
+5011 a2=fopenin "."+httpurl+".html"
+5012 a3=fopenin "."+httpurl+"/index.html"
+5015 if a3 != -1 then Y=a3
+5016 if a2 != -1 then Y=a2
+5017 if a1 != -1 then Y=a1
+5019 if Y == -1 then httpcode=404 else httpcode=200
+5025 h$=""
+5030 repeat
+5040 finput Y  A$
+5050 h$=h$+ A$ +"\n"
+5060 until feof Y
+5070 fclose a1
+5071 fclose a2
+5072 fclose a3
+5080 fclose Y
+5090 httpresponse=h$
+5100 endproc
+9000 defproc setupdb
+9010 D=dbopen "org.sqlite.JDBC" "jdbc:sqlite:motd.db" "sa" "sa"
+9020 dim result(0,0)
+9030 dbselect (D,"SELECT name FROM sqlite_master WHERE type='table' AND name='motd'",1,"result")
+9040 if dbrows(D) == 0  then print proccreatedb else print "database table motd exists, won't create"
+9050 endproc
+9100 defproc createdb
+9105 print "create table motd"
+9110 dbexecute D "create table motd ( id INTEGER PRIMARY KEY AUTOINCREMENT, text varchar(64), created_at DEFAULT CURRENT_TIMESTAMP NOT NULL)"
+9120 endproc

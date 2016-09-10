@@ -1,0 +1,7 @@
+10 x=fopenout "singer"
+20 repeat
+25 print "What is the singer called "
+30 input d$
+40 fprint x, d$
+50 until d$ == "STOP"
+60 fclose x

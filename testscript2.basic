@@ -1,0 +1,48 @@
+1 dim words$(13)
+10 proclist
+20 W=rnd(12)
+25 W=2
+30 A$=words$(W)
+90 L=len(A$)
+100 CORRECT=0
+110 TRIES=0
+111 dim test$(4)
+112 test$(1)="h"
+113 test$(2)="e"
+114 test$(3)="l"
+115 test$(4)="o"
+116 guess=1
+120 print "The word has " L " letters"
+130 print "you have " (2*L) " tries"
+140 repeat
+150 print "GUESS A LETTER " TRIES
+160 G$=test$(guess)
+170 guess=guess+1
+180 P=0
+190 repeat
+200 P=instr(A$,G$,P+1)
+210 if P != 0 then print G$
+220 if P != 0 then CORRECT=CORRECT +1
+225 if P == L then p=0
+230 until P == 0
+240 TRIES=TRIES+1
+250 print "TRIES " TRIES
+255 print "CORRECT " CORRECT
+260 until CORRECT >= L or TRIES == 2*L
+270 if CORRECT >= L then print "Congratulations " else print "Sorry"
+280 print "The word was " A$
+290 print ""
+400 defproc list
+402 words$(1)="inquisition"
+403 words$(2)="hello"
+404 words$(3)="world"
+405 words$(4)="carnivorous"
+406 words$(5)="tenterhook"
+407 words$(6)="decompression"
+408 words$(7)="forthcoming"
+409 words$(8)="nevertheless"
+410 words$(9)="policewoman"
+411 words$(10)="sophisticated"
+412 words$(11)="guesstimate"
+413 words$(12)="notwithstanding"
+420 endproc

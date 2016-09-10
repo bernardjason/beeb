@@ -1,0 +1,10 @@
+10 Y=fopenin "json.txt"
+15 json$=""
+20 repeat
+30 finput Y  A$
+40 json$=json$+ A$
+50 until feof Y
+60 fclose Y
+70 print json$
+80 print getjson "residents 0 name" json$
+90 print getjson "residents 1 name" json$

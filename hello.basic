@@ -1,0 +1,4 @@
+10 print "enter your name"
+20 input G$
+30 print "Hello " G$
+40 goto 30

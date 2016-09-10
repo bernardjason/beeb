@@ -1,0 +1,9 @@
+10 number=10
+20 print number
+30 procshow
+40 print number
+130 defproc show
+140 local number
+150 number=10000
+160 print number
+170 endproc

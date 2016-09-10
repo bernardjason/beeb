@@ -1,0 +1,9 @@
+1 I=5
+5 print "start " I
+12 sleep 100
+15 if I == 10 then goto 70 else goto 20
+16 print "NEVER"
+20 print "all good" I
+30 I = I + 1
+40 goto 5
+70 print "END " I

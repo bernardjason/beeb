@@ -1,0 +1,9 @@
+10 i = 1
+20 repeat
+30 j=1
+40 repeat
+50 print i "   " j
+60 j=j+1
+70 until j > 4
+80 i=i+1
+100 until i > 4

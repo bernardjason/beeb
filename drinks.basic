@@ -1,0 +1,6 @@
+10 Y=fopenin "DRINKS.TXT"
+20 repeat
+30 finput Y  A$
+40 print A$
+50 until feof Y
+60 fclose Y
