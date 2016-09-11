@@ -2,6 +2,8 @@
 
 This project is a rough and limited attempt at implementing something like BBC Basic on the Java Virtual Machine. There are plenty of things missed out as well as a couple of extras like making it capable of being a webserver, database access and some JSON support.
 
+To view a 3 minute demo see https://youtu.be/Hc-gdwjaeJQ
+
 to build (you must have JDK1.8)
 
 ./activator assembly
